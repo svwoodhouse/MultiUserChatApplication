@@ -15,9 +15,12 @@ public class ChatApp
 {
     public static void main(String[] args) 
     {
+        ServerGUI frame =  new ServerGUI();
+        /*
         // GUI Components for the server
         JFrame mainFrame = new JFrame("Server");
         JPanel serverPanel;
+        JPanel serverButtonPanel;
         JPanel serverLogPanel;
         JButton startServer;
         JButton endServer;
@@ -32,8 +35,10 @@ public class ChatApp
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
         
+        serverButtonPanel = new JPanel();
         serverPanel = new JPanel();
         serverLogPanel = new JPanel();
+        
         serverPanel.setLayout(new BorderLayout());
         startServer = new JButton("Start Server");
         endServer = new JButton("End Server");
@@ -43,17 +48,18 @@ public class ChatApp
         scrollPane = new JScrollPane(serverLogs);
         
         // Adds components to the panel and to the frame
-        serverPanel.add(portNumber,BorderLayout.LINE_START);
-        serverPanel.add(portNumberEntry, BorderLayout.CENTER);
-        serverPanel.add(startServer, BorderLayout.CENTER);
-        serverPanel.add(endServer, BorderLayout.LINE_END);
+        serverButtonPanel.add(portNumber,BorderLayout.LINE_START);
+        serverButtonPanel.add(portNumberEntry, BorderLayout.CENTER);
+        serverButtonPanel.add(startServer, BorderLayout.CENTER);
+        serverButtonPanel.add(endServer, BorderLayout.LINE_END);
         serverLogPanel.add(scrollPane);
-
-        mainFrame.getContentPane().add(serverPanel,BorderLayout.PAGE_START);
-        mainFrame.getContentPane().add(serverLogPanel,BorderLayout.CENTER);
+        serverPanel.add(serverButtonPanel, BorderLayout.NORTH);
+        serverPanel.add(serverLogPanel, BorderLayout.SOUTH);
+        
+        mainFrame.getContentPane().add(serverPanel);
         mainFrame.revalidate();
         mainFrame.repaint();
-        
+        */
         
         
     }
