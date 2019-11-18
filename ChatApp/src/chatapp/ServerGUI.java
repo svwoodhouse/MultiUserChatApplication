@@ -154,6 +154,7 @@ public class ServerGUI extends javax.swing.JFrame {
         {
             startButton.setEnabled(false);
             endButton.setEnabled(true);
+            
             try {
                  this.server = new Server(portNumberInt, jTextArea1);
             } catch (IOException ex) {
