@@ -107,16 +107,28 @@ class ClientHandler implements Runnable
         {
             try
             {
+                Thread.sleep(4000);
                 received = dis.readUTF();
                 System.out.println(received);
                 
-                if(Server.chatRunning)
+                if(!Server.chatRunning)
                 {
                     this.isActive = false;
                     this.socket.close();
                     break;
                 }
-                
+                if(received == "USER_EXIT")
+                {
+                    this.isActive = false;
+                    this.socket.close();
+                    for(ClientHandler mc : Server.activeClientList)
+                    {
+                        if(mc.isActive == true)
+                        {
+                            mc.dos.writeUTF(this.name + "has logged out of the chat");
+                        }
+                    }
+                }
                 for(ClientHandler mc : Server.activeClientList)
                 {
                     if(mc.isActive == true)
@@ -127,6 +139,8 @@ class ClientHandler implements Runnable
             }catch (IOException e) { 
                   
                 e.printStackTrace(); 
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ClientHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         

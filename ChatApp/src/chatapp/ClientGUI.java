@@ -220,6 +220,7 @@ public class ClientGUI extends javax.swing.JFrame {
         
         connectButton.setEnabled(false);
         disconnectButton.setEnabled(true);
+        runnable = true;
         
         try {
             InetAddress ip = InetAddress.getByName(addressText.getText());
@@ -232,8 +233,13 @@ public class ClientGUI extends javax.swing.JFrame {
             {
                 public void run()
                 {
-                    while(true)
+                    while(runnable)
                     {
+                        try {
+                            Thread.sleep(4000);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                         if(sendButtonClicked)
                         {
                             String message = chatSendText.getText();
@@ -257,8 +263,13 @@ public class ClientGUI extends javax.swing.JFrame {
             {
                 public void run()
                 {
-                    while(true)
+                    while(runnable)
                     {
+                        try {
+                            Thread.sleep(4000);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                         try{
                             String message = dis.readUTF();
                             System.out.println(message);
@@ -302,10 +313,12 @@ public class ClientGUI extends javax.swing.JFrame {
     private void disconnectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disconnectButtonActionPerformed
         try {
             // TODO add your handling code here:
+            dos.writeUTF("USER_EXIT");
             this.dis.close();
             this.dos.close();
             this.socket.close();
             System.exit(0);
+            runnable = false;
         } catch (IOException ex) {
             Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -369,4 +382,5 @@ public class ClientGUI extends javax.swing.JFrame {
     private DataInputStream dis;
     private DataOutputStream dos;
     private Socket socket;
+    private Boolean runnable;
 }
